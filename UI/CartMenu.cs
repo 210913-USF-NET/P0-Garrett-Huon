@@ -4,10 +4,15 @@ namespace UI
 {
     public class CartMenu : IMenu
     {
+        public CartMenu()
+        {
+
+        }
          public void start()
         {
-            string input = "";
             bool exit = false;
+            do
+            {
             Console.WriteLine("Here is your Cart");
             Console.WriteLine("List<ShoppingList>");
             Console.WriteLine("[1] Add Item");
@@ -15,8 +20,8 @@ namespace UI
             Console.WriteLine("[3] Check Out");
             Console.WriteLine("[x] Back");
 
-            switch (input)
-            {
+             switch (Console.ReadLine())
+             {
                 case "1":
                 break;
 
@@ -30,8 +35,8 @@ namespace UI
                 exit = true;
                 break;
 
-            }
-            while (!exit);
+             }
+            }while (!exit);
             
         }
     }

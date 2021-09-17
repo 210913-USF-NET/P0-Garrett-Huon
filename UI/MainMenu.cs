@@ -8,7 +8,8 @@ namespace UI
         {
             bool exit = false;
             string input = "";
-            do{
+            do
+            {
                Console.WriteLine("Welcome to the Shoppe");
                Console.WriteLine("What would you like to do?");
                Console.WriteLine("[1]See Brands");
@@ -21,11 +22,13 @@ namespace UI
                switch (input)
                {
                    case "1":
-                   IMenu brandMenu = new BrandMenu();
+                   //Console.WriteLine("shops");
+                   new BrandMenu().start();
                    break;
 
                    case "2":
-                   IMenu cartMenu = new CartMenu();
+                   //Console.WriteLine("cart");
+                   new CartMenu().start();
                    break;
 
                    case "3":
@@ -33,19 +36,15 @@ namespace UI
                    break;
 
                    case "x":
-                   Console.WriteLine("Bye Bye");
-                   exit = true;
-                   break;
+                    Console.WriteLine("Bye Bye");
+                    exit = true;
+                    break;
                }
 
+                
+            }while (!exit);
 
-            } while (!exit);
-
-
-            
         }
 
-
-        
     }
 }
