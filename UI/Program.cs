@@ -7,6 +7,7 @@ namespace UI
         static void Main(string[] args)
         {
             new MainMenu().start();
+            
         }
     }
 }

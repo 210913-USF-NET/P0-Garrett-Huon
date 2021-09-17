@@ -2,7 +2,7 @@ using System;
 
 namespace UI
 {
-    public class MainMenu
+    public class MainMenu : IMenu
     {
         public void start()
         {
@@ -20,19 +20,19 @@ namespace UI
 
                switch (input)
                {
-                   case "1" :
-                   Console.WriteLine("Here are your options:");
+                   case "1":
+                   IMenu brandMenu = new BrandMenu();
                    break;
 
-                   case "2" :
-                   Console.WriteLine("In your cart");
+                   case "2":
+                   IMenu cartMenu = new CartMenu();
                    break;
 
-                   case "3" :
+                   case "3":
 
                    break;
 
-                   case "x" :
+                   case "x":
                    Console.WriteLine("Bye Bye");
                    exit = true;
                    break;
