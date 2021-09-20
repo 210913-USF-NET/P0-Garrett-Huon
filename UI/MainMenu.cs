@@ -1,13 +1,21 @@
 using System;
+using StoreBL;
+using Models;
+using DL;
 
 namespace UI
 {
     public class MainMenu : IMenu
     {
-        public void start()
+
+        
+        public MainMenu(BLI bl)
+        {
+            
+        }
+        public void Start()
         {
             bool exit = false;
-            string input = "";
             do
             {
                Console.WriteLine("Welcome to the Shoppe");
@@ -17,22 +25,22 @@ namespace UI
                Console.WriteLine("[3]History");
                Console.WriteLine("[x]Leave");
 
-               input = Console.ReadLine();
+               string input = Console.ReadLine();
 
                switch (input)
                {
                    case "1":
                    //Console.WriteLine("shops");
-                   new BrandMenu().start();
+                   MenuFactory.GetMenu("brand").Start();
                    break;
 
                    case "2":
                    //Console.WriteLine("cart");
-                   new CartMenu().start();
+                   MenuFactory.GetMenu("cart").Start();
                    break;
 
                    case "3":
-
+                   MenuFactory.GetMenu("history").Start();
                    break;
 
                    case "x":
@@ -45,6 +53,9 @@ namespace UI
             }while (!exit);
 
         }
+
+
+       
 
     }
 }

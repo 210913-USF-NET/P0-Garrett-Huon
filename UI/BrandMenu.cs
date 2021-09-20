@@ -1,14 +1,16 @@
 using System;
+using Models;
+using StoreBL;
 
 namespace UI
 {
     public class BrandMenu : IMenu
     {
-        public BrandMenu()
+        public BrandMenu(BLI bl)
         {
 
         }
-        public void start()
+        public void Start()
         {
             bool exit = false;
             do{

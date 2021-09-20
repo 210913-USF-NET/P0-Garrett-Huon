@@ -1,14 +1,16 @@
 using System;
+using Models;
+using StoreBL;
 
 namespace UI
 {
     public class CartMenu : IMenu
     {
-        public CartMenu()
+        public CartMenu(BLI bl)
         {
 
         }
-         public void start()
+         public void Start()
         {
             bool exit = false;
             do
