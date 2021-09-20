@@ -22,7 +22,9 @@ namespace UI
             Console.WriteLine("[3] Check Out");
             Console.WriteLine("[x] Back");
 
-             switch (Console.ReadLine())
+            string input = Console.ReadLine();
+
+             switch (input)
              {
                 case "1":
                 break;

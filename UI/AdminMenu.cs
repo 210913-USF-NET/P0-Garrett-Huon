@@ -1,15 +1,13 @@
 using System;
 using StoreBL;
-using Models;
-using DL;
+
 
 namespace UI
 {
-    public class MainMenu : IMenu
+    public class AdminMenu : IMenu
     {
-
-        
-        public MainMenu(BLI bl)
+         
+        public AdminMenu(BLI bl)
         {
             
         }
@@ -18,11 +16,10 @@ namespace UI
             bool exit = false;
             do
             {
-               Console.WriteLine("Welcome to the Shoppe");
+               Console.WriteLine("Welcome to Terminal");
                Console.WriteLine("What would you like to do?");
                Console.WriteLine("[1]See Brands");
-               Console.WriteLine("[2]See Cart");
-               Console.WriteLine("[3]History");
+               Console.WriteLine("[2]See Customers");
                Console.WriteLine("[x]Leave");
 
                string input = Console.ReadLine();
@@ -37,10 +34,6 @@ namespace UI
                    MenuFactory.GetMenu("cart").Start();
                    break;
 
-                   case "3":
-                   MenuFactory.GetMenu("history").Start();
-                   break;
-
                    case "x":
                    Console.WriteLine("Bye Bye");
                    exit = true;
@@ -51,9 +44,5 @@ namespace UI
             }while (!exit);
 
         }
-
-
-       
-
     }
 }

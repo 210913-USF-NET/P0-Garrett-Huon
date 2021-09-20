@@ -19,14 +19,37 @@ namespace UI
             {
                 case "login":
                     return new LoginMenu();
+
+                case "admin":
+                    return new AdminMenu(new BL(new FileRepo()));
+
                 case "main":
                     return new MainMenu(new BL(new FileRepo()));
+                    
                 case "brand":
                     return new BrandMenu(new BL(new FileRepo()));
+
+                case "one":
+                    return new BrandOne(new BL(new FileRepo()));
+
+                case "two":
+                    return new BrandTwo(new BL(new FileRepo()));    
+
+                case "three":
+                    return new BrandThree(new BL(new FileRepo()));
+
+                case "four":
+                    return new BrandFour(new BL(new FileRepo()));  
+
+                case "five":
+                    return new BrandFive(new BL(new FileRepo())); 
+
                 case "cart":
-                    return new CartMenu(new BL(new FileRepo()));    
+                    return new CartMenu(new BL(new FileRepo())); 
+
                 case "history":
-                    return new HistoryMenu(new BL(new FileRepo())); 
+                    return new HistoryMenu(new BL(new FileRepo()));
+                     
                 default:
                     return null;
             }

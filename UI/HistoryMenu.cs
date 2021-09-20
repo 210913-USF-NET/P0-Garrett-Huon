@@ -17,7 +17,8 @@ namespace UI
             {
                 Console.WriteLine("Here is your shopping history");
                 Console.WriteLine("[x] Back to Main Menu");
-                switch (Console.ReadLine())
+                string input = Console.ReadLine();
+                switch (input)
                 {
                     case "x":
                     exit = true;
