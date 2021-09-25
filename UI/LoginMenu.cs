@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using StoreBL;
-using DL;
 using Models;
 
 
@@ -9,38 +8,30 @@ namespace UI
 {
     public class LoginMenu : IMenu
     {
+
+        public LoginMenu()
+        {
+            
+        }
         public void Start()
         {
             bool exit = false;
             do{
                 Console.WriteLine("Welcome to EShoppe");
-                Console.WriteLine("[y] To Log In");
+                Console.WriteLine("[y] To Proceed");
                 Console.WriteLine("[x] To exit");
-                Console.WriteLine("[a] For Management");
                 string input = Console.ReadLine();
 
                 switch (input)
                 {
                     case "y":
-
-                    Customers newCustomer = new Customers();
-                    Console.WriteLine("Please Enter Your Name");
-                    string name = Console.ReadLine();
-                    Console.WriteLine("Thank you Please Enter Your Email");
-                    
-                    newCustomer.Email = Console.ReadLine();
+                 
                     MenuFactory.GetMenu("main").Start();
-                    break;
-
-                    case "a":
-                    MenuFactory.GetMenu("admin").Start();
                     break;
 
                     case "x":
                     exit = true;
                     break;
-                    
-                    
 
                 }
 

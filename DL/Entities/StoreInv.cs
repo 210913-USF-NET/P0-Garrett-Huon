@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace DL.Entities
+{
+    public partial class StoreInv
+    {
+        public int Id { get; set; }
+        public string Ch { get; set; }
+        public string ProdName { get; set; }
+        public decimal ProdPrice { get; set; }
+        public int ProdStock { get; set; }
+        public int StoreId { get; set; }
+
+        public virtual Store Store { get; set; }
+    }
+}

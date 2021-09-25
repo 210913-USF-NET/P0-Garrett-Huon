@@ -1,5 +1,8 @@
 using DL;
 using StoreBL;
+using DL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace UI
 {
@@ -7,6 +10,11 @@ namespace UI
     {
         public static IMenu GetMenu(string menuString)
         {
+            string connectionString = File.ReadAllText(@"../connectString.txt");
+            DbContextOptions<ProjZeroOneContext> options = new DbContextOptionsBuilder<ProjZeroOneContext>()
+            .UseSqlServer(connectionString).Options;
+            ProjZeroOneContext context = new ProjZeroOneContext(options);
+
             //this is an example of dependency injection
             //I'm "injecting" an instance of business logic layer to restaurant menu, and an implementation of 
             //IRepo to business logic
@@ -17,39 +25,46 @@ namespace UI
             // restaurantMenu.Start();
             switch (menuString.ToLower())
             {
+                //Base Menus
                 case "login":
                     return new LoginMenu();
 
                 case "admin":
-                    return new AdminMenu(new BL(new FileRepo()));
+                    return new AdminMenu(new BL(new DBRep(context)));
 
                 case "main":
-                    return new MainMenu(new BL(new FileRepo()));
-                    
-                case "brand":
-                    return new BrandMenu(new BL(new FileRepo()));
-
-                case "one":
-                    return new BrandOne(new BL(new FileRepo()));
-
-                case "two":
-                    return new BrandTwo(new BL(new FileRepo()));    
-
-                case "three":
-                    return new BrandThree(new BL(new FileRepo()));
-
-                case "four":
-                    return new BrandFour(new BL(new FileRepo()));  
-
-                case "five":
-                    return new BrandFive(new BL(new FileRepo())); 
-
-                case "cart":
-                    return new CartMenu(new BL(new FileRepo())); 
+                    return new MainMenu(new BL(new DBRep(context)));
 
                 case "history":
-                    return new HistoryMenu(new BL(new FileRepo()));
-                     
+                    return new HistoryMenu(new BL(new DBRep(context)));    
+
+
+                //Brand Related    
+                case "stores":
+                    return new BrandMenu(new BL(new DBRep(context)));
+
+                case "bags":
+                    return new Bags(new BL(new DBRep(context)));
+
+                case "cardboard":
+                    return new Cardboard(new BL(new DBRep(context)));    
+
+                case "luggage":
+                    return new Luggage(new BL(new DBRep(context)));
+
+                case "plastic":
+                    return new Plastic(new BL(new DBRep(context)));  
+
+                case "freight":
+                    return new Freight(new BL(new DBRep(context)));
+
+
+                //User Shopping
+                case "cart":
+                    return new CartMenu(new BL(new DBRep(context))); 
+
+
+
                 default:
                     return null;
             }

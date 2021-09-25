@@ -8,21 +8,31 @@ namespace StoreBL
     public class BL : BLI
     {
 
-        private IRepos _repo;
+        private IRep _repo;
 
-        public BL(IRepos repo)
+        public BL(IRep repo)
         {
             _repo = repo;
         }
 
-        public List<Customers> GetAllCustomers()
+        public List<Customers> GetCustomers()
         {
-            throw new NotImplementedException();
+            return _repo.GetCustomers();
         }
 
-        public Customers AddCustomer(Customers customer)
+        public Customers AddCustomers(Customers cust)
         {
-            throw new NotImplementedException();
+            return _repo.AddCustomers(cust);
+        }
+
+        public List<Product> GetInventory()
+        {
+            return _repo.GetInventory();
+        }
+
+        public Product AddProduct(Product prod)
+        {
+            return _repo.AddProduct(prod);
         }
 
     }

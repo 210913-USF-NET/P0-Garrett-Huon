@@ -15,10 +15,10 @@ namespace UI
             bool exit = false;
             do{
             Console.WriteLine("Here are your store options:");
-            Console.WriteLine("[1] Lays");
-            Console.WriteLine("[2] Brand 2");
-            Console.WriteLine("[3] Brand 3");
-            Console.WriteLine("[4] Brand 4");
+            Console.WriteLine("[1] Bags");
+            Console.WriteLine("[2] Cardboard Bros");
+            Console.WriteLine("[3] Luggage");
+            Console.WriteLine("[4] plastic");
             Console.WriteLine("[5] Brand 5");
             Console.WriteLine("[x] Back");
             string input = Console.ReadLine();
@@ -26,23 +26,23 @@ namespace UI
                 switch(input)
                 {
                     case "1":
-                    MenuFactory.GetMenu("one").Start();
+                    MenuFactory.GetMenu("bags").Start();
                     break;
 
                     case "2":
-                    MenuFactory.GetMenu("two").Start();
+                    MenuFactory.GetMenu("cardboard").Start();
                     break;
 
                     case "3":
-                    MenuFactory.GetMenu("three").Start();
+                    MenuFactory.GetMenu("luggage").Start();
                     break;
 
                     case "4":
-                    MenuFactory.GetMenu("four").Start();
+                    MenuFactory.GetMenu("plastic").Start();
                     break;
 
                     case "5":
-                    MenuFactory.GetMenu("five").Start();
+                    MenuFactory.GetMenu("freight").Start();
                     break;
 
                     case "x":

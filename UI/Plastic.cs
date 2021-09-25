@@ -3,9 +3,9 @@ using StoreBL;
 
 namespace UI
 {
-    public class BrandFour : IMenu
+    public class Plastic : IMenu
     {
-        public BrandFour(BLI bl)
+        public Plastic(BLI bl)
         {
             
         }

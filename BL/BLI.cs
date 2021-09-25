@@ -6,8 +6,8 @@ namespace StoreBL
 {
     public interface BLI
     {
-        Customers AddCustomer(Customers customer);
-        List<Customers> GetAllCustomers();
-         
+        Customers AddCustomers(Customers cust);
+        List<Customers> GetCustomers();
+        List<Product> GetInventory();
     }
 }

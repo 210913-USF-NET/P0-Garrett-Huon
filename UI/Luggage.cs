@@ -1,15 +1,13 @@
 using System;
 using StoreBL;
-using DL;
-
 
 namespace UI
 {
-    public class BrandOne : IMenu
+    public class Luggage : IMenu
     {
-        public BrandOne(BLI bl)
+        public Luggage(BLI bl)
         {
-
+            
         }
         public void Start()
         {
@@ -21,6 +19,7 @@ namespace UI
                 Console.WriteLine("[2] Add Item(s) to Cart");
                 Console.WriteLine("[x] Back");
                 string input = Console.ReadLine();
+
                 switch (input)
                 {
                     case "1":
