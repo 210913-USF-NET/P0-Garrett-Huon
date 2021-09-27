@@ -3,6 +3,8 @@ using StoreBL;
 using Models;
 using System.Collections.Generic;
 using DL;
+using Entity = DL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace UI
 {
@@ -27,7 +29,7 @@ namespace UI
                     alreadyLog = true;
                 }
                 
-                Console.WriteLine($"Hello, {addedCust.Name}");
+                Console.WriteLine($"Hello");
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("[1]See Stores");
                 Console.WriteLine("[2]See Cart");
@@ -69,8 +71,9 @@ namespace UI
 
             Console.WriteLine("Please Enter Your Email");
             newCustomer.Email = Console.ReadLine();
-
             Customers addedCust = _bl.AddCustomers(newCustomer);
+
+            
         }
 
 

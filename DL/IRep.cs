@@ -7,9 +7,14 @@ namespace DL
     {
          Customers AddCustomers(Customers cust);
          List<Customers> GetCustomers();
-         //List<Customers> SearchCustomer(string queryStr);
+        
+         List<Customers> SearchACustomer(string queryStr);
+         Customers GetCustomerById(int id);
          List<Product> GetInventory();
 
          Product AddProduct(Product prod);
+
+         List<Product> ViewProducts(string queryStr);
+        
     }
 }

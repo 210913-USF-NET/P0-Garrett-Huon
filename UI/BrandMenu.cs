@@ -15,11 +15,11 @@ namespace UI
             bool exit = false;
             do{
             Console.WriteLine("Here are your store options:");
-            Console.WriteLine("[1] Bags");
+            Console.WriteLine("[1] Bag'em Up");
             Console.WriteLine("[2] Cardboard Bros");
-            Console.WriteLine("[3] Luggage");
-            Console.WriteLine("[4] plastic");
-            Console.WriteLine("[5] Brand 5");
+            Console.WriteLine("[3] Luggin It Around");
+            Console.WriteLine("[4] Plasticly See Through");
+            Console.WriteLine("[5] A Freight of a Good Time");
             Console.WriteLine("[x] Back");
             string input = Console.ReadLine();
 

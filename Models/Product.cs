@@ -5,7 +5,7 @@ namespace Models
     public class Product
     {
         private int _stock;
-        private long _price;
+        public decimal ProdPrice {get; set;}
          public Product()
         {
             
@@ -21,8 +21,8 @@ namespace Models
             this.ProdPrice = price;
                
         }
-                public string ProdName {get; set;}
-        
+        public string ProdName {get; set;}
+        public string Ch {get; set;}
         public int ProdStock
         {
             get {
@@ -42,16 +42,17 @@ namespace Models
             
         }
         public int Id {get; set;}
-
-        public decimal ProdPrice {get; set;}
+       
+        public int StoreId {get; set;}
+        
 
         public override string ToString()
         {
-            return $"Id: {this.Id}, ProdName {this.ProdName}, ProdPrice = {this.ProdPrice}, ProdStock = {this.ProdStock}";
+            return $"Id: {this.Id}, Ch: {this.Ch}, ProdName:{this.ProdName}, ProdPrice: {this.ProdPrice}, ProdStock: {this.ProdStock}, StoreId: {this.StoreId}";
         }
         public bool Equals(Product product)
         {
-            return this.ProdName == product.ProdName && this.ProdPrice == product.ProdPrice && this.ProdStock == product.ProdStock;
+            return this.ProdName == product.ProdName && this.Ch == product.Ch &&this.ProdPrice == product.ProdPrice && this.ProdStock == product.ProdStock && this.StoreId == product.StoreId;
         }
     }
 

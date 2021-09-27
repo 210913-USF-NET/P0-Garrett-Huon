@@ -20,7 +20,7 @@ namespace UI
             bool exit = false;
             do
             {
-                Console.WriteLine("Welcome to BRAND");
+                Console.WriteLine("Welcome to Cardboard Bros");
                 Console.WriteLine("[1] See Products");
                 Console.WriteLine("[2] Add Item(s) to Cart");
                 Console.WriteLine("[3] Edit Inventory");
@@ -30,13 +30,14 @@ namespace UI
                 switch (input)
                 {
                     case "1":
-                        //ViewInventory();
+                        ViewInventory();
                         break;
 
                     case "2":
                         break;
 
                     case "3":
+                        EditInventory();
                         break;
 
                     case "x":
@@ -74,17 +75,7 @@ namespace UI
                 switch (input)
                 {
                     case "1":
-                    // Product newProd = new Product();
-
-                    // Console.WriteLine("Please Enter Item Name");
-                    // newProd.Name = Console.ReadLine();
-
-                    // Console.WriteLine("Please Enter the Price");
-                    // newCustomer.Email = Console.ReadLine();
-
-                    // Console.WriteLine("Please Enter Current Stock");
-                    // newCustomer.Email = Console.ReadLine();
-                    
+                    CreateProduct();
                     break;
 
                     case "2":
@@ -95,6 +86,43 @@ namespace UI
                     break;
                 }
             } while (!exit);
+        }
+
+        private void ViewInventory()
+        {
+            List<Model.Product> setInventory = _bl.ViewProducts("C");
+            if(setInventory.Count == 0)
+            {
+                Console.WriteLine("Nothing here");
+            }
+            else
+            {
+                foreach(Models.Product product in setInventory)
+                Console.WriteLine(product);
+            }
+
+        }
+
+        private void CreateProduct()
+        {
+            Product newProd = new Product();
+
+            Console.WriteLine("Please Enter Item Name");
+            newProd.Name = Console.ReadLine();
+
+            Console.WriteLine("Identifying Character");
+            newProd.Ch = Console.ReadLine();
+
+            Console.WriteLine("Please Enter the Price");
+            newProd.ProdPrice = Console.ReadLine();
+
+            Console.WriteLine("Please Enter Current Stock");
+            newProd.ProdStock = Console.ReadLine();
+
+            Console.WriteLine("Store Number");
+            newProd.StoreId = Console.ReadLine();
+            Product addProd = _bl.AddProduct();
+            
         }
 
 

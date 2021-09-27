@@ -30,7 +30,7 @@ VALUES
 ('A Freight of a Good Time', '4962 Brig St', 'Juneau', 'AL');
 
 
-SELECT * FROM Customers;
+SELECT FROM Customers;
 
 
 CREATE TABLE ShopOrder(                     /*After everything else*/
@@ -79,7 +79,8 @@ VALUES
 ('F','Stable Truck Shipping Container', 275.00, 6, 5);*/
 
 
-SELECT StoreInv.ID, StoreInv.ProdName From StoreInv;
+SELECT StoreInv.ID, StoreInv.ProdName, StoreInv.StoreId From StoreInv 
+WHERE StoreInv.StoreId = 1 ;
 
 
 DROP TABLE StoreInv

@@ -24,7 +24,15 @@ namespace StoreBL
         {
             return _repo.AddCustomers(cust);
         }
+        public List<Customers> SearchACustomer(string queryStr)
+        {
+            return _repo.SearchACustomer(queryStr);
+        }
 
+        public Customers GetCustomerById(int id)
+        {
+            return _repo.GetCustomerById(id);
+        }
         public List<Product> GetInventory()
         {
             return _repo.GetInventory();
@@ -35,5 +43,11 @@ namespace StoreBL
             return _repo.AddProduct(prod);
         }
 
+        public List<Product> ViewProducts(string queryStr)
+        {
+            return _repo.ViewProducts(queryStr);
+        }
+
+      
     }
 }

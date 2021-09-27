@@ -36,7 +36,7 @@ namespace UI
                     return new MainMenu(new BL(new DBRep(context)));
 
                 case "history":
-                    return new HistoryMenu(new BL(new DBRep(context)));    
+                    return new HistoryMenu(new BL(new DBRep(context)), new ShoppesService());    
 
 
                 //Brand Related    
