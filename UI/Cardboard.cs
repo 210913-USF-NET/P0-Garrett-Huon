@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using Model = Models;
 using Entity = DL.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace UI
 {
     public class Cardboard : IMenu
     {
         private BLI _bl;
-        public Cardboard(BLI bl)
+        private ShoppesService _shoppeservice;
+        public Cardboard(BLI bl, ShoppesService shoppeservice)
         {
             _bl = bl;
+            _shoppeservice = shoppeservice;
         }
         public void Start()
         {
@@ -24,6 +27,7 @@ namespace UI
                 Console.WriteLine("[1] See Products");
                 Console.WriteLine("[2] Add Item(s) to Cart");
                 Console.WriteLine("[3] Edit Inventory");
+                Console.WriteLine("[4] See Store History");
                 Console.WriteLine("[x] Back");
                 string input = Console.ReadLine();
 
@@ -34,10 +38,16 @@ namespace UI
                         break;
 
                     case "2":
+                        ProdToCart();
                         break;
 
                     case "3":
                         EditInventory();
+                        break;
+
+                    case "4":
+                    Console.WriteLine("Order History");
+                        viewOrders();
                         break;
 
                     case "x":
@@ -47,21 +57,6 @@ namespace UI
             } while (!exit);
         }
 
-        private void ViewInventory()
-        {
-            List<Model.Product> fullInv = _bl.GetInventory();
-            if (fullInv.Count == 0)
-            {
-                Console.WriteLine("No Products");
-            }
-            else
-            {
-                foreach (Model.Product prod in fullInv)
-                {
-                    Console.WriteLine(prod.ToString());
-                }
-            }
-        }
 
         private void EditInventory()
         {
@@ -69,21 +64,21 @@ namespace UI
             do
             {
                 Console.WriteLine("[1] Create new Product");
-                Console.WriteLine("[2] Restock a Product");
+                Console.WriteLine("[2] See Shop History");
                 Console.WriteLine("[3] Exit");
                 string input = Console.ReadLine();
                 switch (input)
                 {
                     case "1":
-                    CreateProduct();
-                    break;
+                        CreateProduct();
+                        break;
 
                     case "2":
-                    break;
+                        break;
 
                     case "3":
-                    exit = true;
-                    break;
+                        exit = true;
+                        break;
                 }
             } while (!exit);
         }
@@ -91,41 +86,104 @@ namespace UI
         private void ViewInventory()
         {
             List<Model.Product> setInventory = _bl.ViewProducts("C");
-            if(setInventory.Count == 0)
+            if (setInventory.Count == 0)
             {
                 Console.WriteLine("Nothing here");
             }
             else
             {
-                foreach(Models.Product product in setInventory)
-                Console.WriteLine(product);
+                foreach (Models.Product product in setInventory)
+                    Console.WriteLine(product);
             }
 
         }
 
         private void CreateProduct()
         {
-            Product newProd = new Product();
+            Model.Product newProd = new Model.Product();
 
             Console.WriteLine("Please Enter Item Name");
-            newProd.Name = Console.ReadLine();
+            newProd.ProdName = Console.ReadLine();
 
             Console.WriteLine("Identifying Character");
             newProd.Ch = Console.ReadLine();
 
             Console.WriteLine("Please Enter the Price");
-            newProd.ProdPrice = Console.ReadLine();
+            newProd.ProdPrice = Convert.ToDecimal(Console.ReadLine());
 
             Console.WriteLine("Please Enter Current Stock");
-            newProd.ProdStock = Console.ReadLine();
+            newProd.ProdStock = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Store Number");
-            newProd.StoreId = Console.ReadLine();
-            Product addProd = _bl.AddProduct();
-            
+            newProd.StoreId = Int32.Parse(Console.ReadLine());
+            Model.Product addProd = _bl.AddProduct(newProd);
+
         }
 
+        private void ProdToCart()
+        {
+            
+            List<Model.Product> prodToCart = _bl.ViewProducts("C");
+            if (prodToCart.Count == 0)
+            {
+                Console.WriteLine("Nothing here");
+            }
+            else
+            {
+                foreach (Models.Product product in prodToCart)
+                    Console.WriteLine($"{product.ProdName}{product.ProdPrice}{product.ProdStock}");
+            }
+            pickprod:
+            Model.Product selectedProduct = _shoppeservice.SelectAProduct("Which Item Would You Like?", prodToCart);
 
+            _bl.GetProdById(selectedProduct.Id);
+            Console.WriteLine($"How many {selectedProduct.ProdName}(s) would you like?");
+            int input = Convert.ToInt32(Console.ReadLine());
+            //Model.Product newUpdate = _bl.UpdateItem(selectedProduct);
+           if (selectedProduct.ProdStock == 0 || selectedProduct.ProdStock < 0 )
+           {
+               Console.WriteLine("Sorry! We are out of {selectedProduct}");
+               goto pickprod;
+           }
+           else
+           {
+               
+               Model.LineItem cartItem = new Model.LineItem();
+               cartItem.Quant = input;
+               cartItem.StoreId = selectedProduct.StoreId;
+               cartItem.ProdId = selectedProduct.Id;
+               Model.LineItem addItem = _bl.AddItemToCart(cartItem);
+               Model.TempCart.Record(Convert.ToString(addItem));
+               Console.WriteLine($"You added {input} \n{cartItem} to your cart");
+               
+           }
+
+        }
+
+        public void viewOrders()
+        {
+             List<Model.Product> allInv = _bl.GetInventory();
+            List<Model.LineItem> lineInv = _bl.GetLineItem();
+            List<Model.ShopOrder> orderInv = _bl.GetAllOrders();
+
+            var TotalOrder = from c1 in allInv
+                            join c2 in lineInv on c1.Id equals c2.ProdId
+                            join c3 in orderInv on c2.Id equals c3.LineItemId
+                select new { 
+                    c2.ProdId,
+                    c2.Quant,
+                    c1.ProdPrice,
+                    LineItemId = c2.Id,
+                    c1.StoreId,
+                    OrderId = c3.Id
+                    
+                };
+
+              foreach(var item in TotalOrder)
+              {
+                 Console.WriteLine($"Store ID:{item.StoreId == 2}  Product ID:{item.ProdId}  Price:{item.ProdPrice}  Quantity: {item.Quant}  OrderId:{item.OrderId}  LineItemId:{item.LineItemId}");
+              }
+        }
 
     }
 }

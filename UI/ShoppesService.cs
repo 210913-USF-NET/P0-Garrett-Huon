@@ -33,5 +33,57 @@ namespace UI
                 goto selectCust;
             }
         }
+
+        public Product SelectAProduct(string prompt, List<Product> listPick)
+        {
+            selectProd:
+            Console.WriteLine(prompt);
+            for (int i = 0; i < listPick.Count; i++)
+            {
+                Console.WriteLine($"[{i}] {listPick[i]}");
+            }
+            string input = Console.ReadLine();
+            int parsedInput;
+
+            //pass by reference in, out, ref
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+
+            //I'm checking to see that parse has been successful
+            //and the result stays within the boundary of the index
+            if(parseSuccess && parsedInput >= 0 && parsedInput < listPick.Count)
+            {
+                return listPick[parsedInput];
+            }
+            else {
+                Console.WriteLine("invalid input");
+                goto selectProd;
+            }
+        }
+
+        public ShopOrder SelectOrder(string prompt, List<ShopOrder> listPick)
+        {
+            selectProd:
+            Console.WriteLine(prompt);
+            for (int i = 0; i < listPick.Count; i++)
+            {
+                Console.WriteLine($"[{i}] {listPick[i]}");
+            }
+            string input = Console.ReadLine();
+            int parsedInput;
+
+            //pass by reference in, out, ref
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+
+            //I'm checking to see that parse has been successful
+            //and the result stays within the boundary of the index
+            if(parseSuccess && parsedInput >= 0 && parsedInput < listPick.Count)
+            {
+                return listPick[parsedInput];
+            }
+            else {
+                Console.WriteLine("invalid input");
+                goto selectProd;
+            }
+        }
     }
 }

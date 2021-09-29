@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FKD4lGmgE5tHuq1sFkr9t9siipCSYWn/uVzkXABem245Y4hMTFCoe0U81cAWBRpR84j6tss79yfxCT0NDmTARA==",
+  "dgSpecHash": "kFibK3pODA7NzLCUeJGERqbLkbXIVZHYY+B3qEkMCV4AHO8EPgtQ6Lre2x0wSqizM6CpUwZuZUidAu14u82/Ug==",
   "success": true,
   "projectFilePath": "C:\\Users\\Garrett\\Documents\\TrainerCode\\P0-Garrett-Huon\\DL\\DL.csproj",
   "expectedPackageFiles": [
@@ -36,6 +36,9 @@
     "C:\\Users\\Garrett\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Garrett\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Users\\Garrett\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
+    "C:\\Users\\Garrett\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",
+    "C:\\Users\\Garrett\\.nuget\\packages\\serilog.sinks.console\\4.0.0\\serilog.sinks.console.4.0.0.nupkg.sha512",
+    "C:\\Users\\Garrett\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512",
     "C:\\Users\\Garrett\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Garrett\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\Garrett\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",

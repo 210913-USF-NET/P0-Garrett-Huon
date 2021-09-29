@@ -13,10 +13,10 @@ namespace Tests
 {
     public class DBTests
     {
-        private readonly DbContextOptions<Entity.ProjZeroOneContext> options; //DbContextOptions<Entity.Customer> options;
+        private readonly DbContextOptions<Entity.ProjZeroONeContext> options; //DbContextOptions<Entity.Customer> options;
         public DBTests()
         {
-            options = new DbContextOptionsBuilder<Entity.ProjZeroOneContext>()
+            options = new DbContextOptionsBuilder<Entity.ProjZeroONeContext>()
                     .UseSqlite("Filename=Test.db").Options;
             Seed();
         }
@@ -26,7 +26,7 @@ namespace Tests
 
         public void GetCustomersShouldGetCustomers()
         {
-            using (var context = new Entity.ProjZeroOneContext(options))
+            using (var context = new Entity.ProjZeroONeContext(options))
             {
                 IRep repo = new DBRep(context);
 
@@ -37,9 +37,11 @@ namespace Tests
             }
         }
 
+        [Fact]
+
         public void AddCustomerShouldAddCustomer()
         {
-            using (var context = new Entity.ProjZeroOneContext(options))
+            using (var context = new Entity.ProjZeroONeContext(options))
             {
                 IRep repo = new DBRep(context);
                 Models.Customers addCust = new Models.Customers()
@@ -50,7 +52,7 @@ namespace Tests
                 };
                 repo.AddCustomers(addCust);
             }
-            using (var context = new Entity.ProjZeroOneContext(options))
+            using (var context = new Entity.ProjZeroONeContext(options))
             {
                 Entity.Customer cust = context.Customers.FirstOrDefault(r => r.Id == 3);
                 Assert.NotNull(cust);
@@ -65,7 +67,7 @@ namespace Tests
 
         private void Seed()
         {
-            using (var context = new Entity.ProjZeroOneContext(options))
+            using (var context = new Entity.ProjZeroONeContext(options))
             {
                 //check db clean state
                 context.Database.EnsureDeleted();

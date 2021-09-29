@@ -1,8 +1,7 @@
 using System;
 using StoreBL;
-using Models;
+using Model = Models;
 using System.Collections.Generic;
-using DL;
 using Entity = DL.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,14 +63,38 @@ namespace UI
         }
         private void CreateCustomer()
         {
-            Customers newCustomer = new Customers();
-
+            Model.Customers newCustomer = new Model.Customers();
+            inputName:
             Console.WriteLine("Please Enter Your Name");
-            newCustomer.Name = Console.ReadLine();
+            string name = Console.ReadLine();
+            try
+                {
+                    newCustomer.Name = name;
+                }
+                catch(Model.InputInvalidException n)
+                {
+                    Console.WriteLine(n.Message);
+                    goto inputName;
+                }
+            
 
+            inputemail:
             Console.WriteLine("Please Enter Your Email");
-            newCustomer.Email = Console.ReadLine();
-            Customers addedCust = _bl.AddCustomers(newCustomer);
+            string email = Console.ReadLine();
+           
+                try
+                {
+                    newCustomer.Email = email;
+                }
+                catch(Model.InputInvalidException e)
+                {
+                    Console.WriteLine(e.Message);
+                    goto inputemail;
+                }
+
+
+            Model.Customers addedCust = _bl.AddCustomers(newCustomer);
+            
 
             
         }

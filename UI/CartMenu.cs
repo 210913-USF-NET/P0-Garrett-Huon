@@ -1,47 +1,49 @@
 using System;
-using Models;
 using StoreBL;
+using System.Collections.Generic;
+using Model = Models;
+using Entity = DL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace UI
 {
     public class CartMenu : IMenu
     {
+        private BLI _bl;
+
         public CartMenu(BLI bl)
         {
+            _bl = bl;
 
         }
-         public void Start()
+        public void Start()
         {
             bool exit = false;
             do
             {
-            Console.WriteLine("Here is your Cart");
-            Console.WriteLine("List<ShoppingList>");
-            Console.WriteLine("[1] Add Item");
-            Console.WriteLine("[2] Remove Item");
-            Console.WriteLine("[3] Check Out");
-            Console.WriteLine("[x] Back");
+                Console.WriteLine("Here is your Cart");
+                Model.TempCart.Display();
+                Console.WriteLine("[1] Check Out");
+                Console.WriteLine("[x] Back");
 
-            string input = Console.ReadLine();
+                string input = Console.ReadLine();
 
-             switch (input)
-             {
-                case "1":
-                break;
+                switch (input)
+                {
+                    case "1":
+                        MenuFactory.GetMenu("check").Start();
+                        break;
 
-                case "2":
-                break;
+                    case "x":
+                        exit = true;
+                        break;
 
-                case "3":
-                break;
+                }
+            } while (!exit);
 
-                case "x":
-                exit = true;
-                break;
-
-             }
-            }while (!exit);
-            
         }
+
+
     }
 }

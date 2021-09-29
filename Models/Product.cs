@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Serilog;
 
 namespace Models
 {
     public class Product
     {
-        private int _stock;
-        public decimal ProdPrice {get; set;}
+        
+        
          public Product()
         {
             
@@ -23,15 +26,47 @@ namespace Models
         }
         public string ProdName {get; set;}
         public string Ch {get; set;}
+        public int Id {get; set;}
+        private decimal _price;
+        
+        public decimal ProdPrice
+        {
+            get
+            {
+                return _price;
+            }
+            set
+            {
+                Regex pattern = new Regex("^[0-9 .]+$");
+                 if(value<0 || value == 0)
+                {
+                    InputInvalidException p = new InputInvalidException("Nothing Is Free");
+                    Log.Warning(p.Message);
+                    throw p;
+                }
+                else if(!pattern.IsMatch(Convert.ToString(value)))
+                {
+                    throw new InputInvalidException("Please Set Price with Acceptable Values");
+                }
+                else
+                {
+                    _price = value;
+                }
+            }
+        }
+        private int _stock;
         public int ProdStock
         {
             get {
                 return _stock;
             } 
             set {
+                Regex pattern = new Regex("^[0-9]+$");
                  if(value<0)
                 {
-                    throw new InputInvalidException("Value cannot be below zero.");
+                    InputInvalidException s = new InputInvalidException("Value cannot be below zero.");
+                    Log.Warning(s.Message);
+                    throw s;
                 }
                 else
                 {
@@ -41,7 +76,7 @@ namespace Models
             }
             
         }
-        public int Id {get; set;}
+        
        
         public int StoreId {get; set;}
         

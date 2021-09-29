@@ -7,7 +7,7 @@ CREATE TABLE Customers(
 
 );
 
-INSERT INTO Customers
+INSERT INTO Customers (Name, Email)
 VALUES ('Mary', 'Mary.Lamb@gmail.com'),
 ('Admin', 'Admin@boxshoppe.com');
 
@@ -30,22 +30,24 @@ VALUES
 ('A Freight of a Good Time', '4962 Brig St', 'Juneau', 'AL');
 
 
-SELECT FROM Customers;
+SELECT * FROM Customers;
 
 
 CREATE TABLE ShopOrder(                     /*After everything else*/
     ID INT PRIMARY KEY IDENTITY(100,1),
     Address VARCHAR(100) NOT NULL,
+    City VARCHAR(100) NOT NULL,
+    State VARCHAR(100) NOT NULL,
+    CName VARCHAR(100) NOT NULL,
     Payment VARCHAR(100) NOT NULL,
-    Cost DECIMAL(10,2) NOT NULL,
-    CustId INT FOREIGN KEY REFERENCES Customers(ID) NOT NULL
+    Cost DECIMAL(20,2) NOT NULL,
+    LineId INT FOREIGN KEY REFERENCES LineItem(ID)
 
 );
-
+SELECT * FROM ShopOrder;
 CREATE TABLE StoreInv(
-    ID INT IDENTITY(1,1),
+    ID INT Primary Key IDENTITY(500,1),
     CH CHAR(3),
-    PRIMARY KEY(CH, ID),
     ProdName VARCHAR(100) NOT NULL,
     ProdPrice DECIMAL(10,2) NOT NULL,
     ProdStock INT NOT Null,
@@ -53,7 +55,7 @@ CREATE TABLE StoreInv(
 
 );
 
-/*INSERT INTO StoreInv(CH, ProdName, ProdPrice, ProdStock, StoreId)
+INSERT INTO StoreInv(CH, ProdName, ProdPrice, ProdStock, StoreId)
 VALUES 
 ('C','Super 12x12x12', 8.99, 30, 2),
 ('C','Crazy 8x8x8', 7.99, 20, 2),
@@ -76,12 +78,21 @@ VALUES
 ('P','Tupperware Pack', 6.99, 40, 4),
 
 ('F','Sea-Ready Freight Container', 319.99, 9, 5),
-('F','Stable Truck Shipping Container', 275.00, 6, 5);*/
+('F','Stable Truck Shipping Container', 275.00, 6, 5);
+
+CREATE TABLE LineItem(
+   ID INT PRIMARY KEY IDENTITY (10000,1),
+   Quant INT NOT NULL,
+   StoreId INT FOREIGN KEY REFERENCES Store(ID) ON DELETE CASCADE NOT NULL,
+   ProdId INT FOREIGN KEY REFERENCES StoreInv(ID) 
+);
 
 
 SELECT StoreInv.ID, StoreInv.ProdName, StoreInv.StoreId From StoreInv 
 WHERE StoreInv.StoreId = 1 ;
-
-
-DROP TABLE StoreInv
+SELECT * FROM StoreInv;
+SELECT * FROM LineItem;
+DELETE From StoreInv where ProdPrice =5.94;
+DELETE FROM ShopOrder;
+DELETE FROM LineItem;
 

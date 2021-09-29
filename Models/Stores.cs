@@ -4,7 +4,7 @@ namespace Models
     {
         public Stores()
         {
-            
+
         }
 
         //Creating Customer Details
@@ -19,12 +19,12 @@ namespace Models
             this.City = city;
             this.State = state;
         }
-        public string Name {get; set;}
-        public string Address {get; set;}
-         public string Email {get; set;}
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
 
-         public string City{get; set;}
+        public string City { get; set; }
 
-         public string State {get; set;}
-    }  
+        public string State { get; set; }
+    }
 }

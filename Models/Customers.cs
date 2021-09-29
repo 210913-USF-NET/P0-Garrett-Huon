@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Serilog;
+
 
 namespace Models
 {
@@ -19,9 +23,55 @@ namespace Models
         {
             this.Email = email;
         }
-        public string Name {get; set;}
-        public string Email {get; set;}
+        private string _name;
+        public string Name 
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                Regex npattern = new Regex("^[a-zA-Z]+$");
+                if(value.Length == 0)
+                {
+                    InputInvalidException n = new InputInvalidException("Name can't be empty");
+                    Log.Warning(n.Message);
+                    throw n;
+                }
+                else
+                {
+                    _name = value;
+                }
+            }
+
+        }
+        
         public int Id {get; set;}
+
+        private string _email;
+        
+        public string Email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                if(value.Length == 0)
+                {
+                    InputInvalidException e = new InputInvalidException("Email can't be empty");
+                    Log.Warning(e.Message);
+                    throw e;
+                }
+                else
+                {
+                    _email = value;
+                }
+
+            }
+        }
         
 
         public override string ToString()

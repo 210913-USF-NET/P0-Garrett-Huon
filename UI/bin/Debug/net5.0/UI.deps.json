@@ -1114,6 +1114,11 @@
         }
       },
       "Models/1.0.0": {
+        "dependencies": {
+          "Serilog": "2.10.0",
+          "Serilog.Sinks.Console": "4.0.0",
+          "Serilog.Sinks.File": "5.0.0"
+        },
         "runtime": {
           "Models.dll": {}
         }

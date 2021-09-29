@@ -6,18 +6,20 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DL.Entities
 {
-    public partial class ProjZeroOneContext : DbContext
+    public partial class ProjZeroONeContext : DbContext
     {
-        public ProjZeroOneContext()
+        public ProjZeroONeContext()
         {
         }
 
-        public ProjZeroOneContext(DbContextOptions<ProjZeroOneContext> options)
+        public ProjZeroONeContext(DbContextOptions<ProjZeroONeContext> options)
             : base(options)
         {
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<LineItem> LineItems { get; set; }
+        public virtual DbSet<ShopOrder> ShopOrders { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<StoreInv> StoreInvs { get; set; }
 
@@ -38,6 +40,63 @@ namespace DL.Entities
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<LineItem>(entity =>
+            {
+                entity.ToTable("LineItem");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.HasOne(d => d.Prod)
+                    .WithMany(p => p.LineItems)
+                    .HasForeignKey(d => d.ProdId)
+                    .HasConstraintName("FK__LineItem__ProdId__236943A5");
+
+                entity.HasOne(d => d.Store)
+                    .WithMany(p => p.LineItems)
+                    .HasForeignKey(d => d.StoreId)
+                    .HasConstraintName("FK__LineItem__StoreI__22751F6C");
+            });
+
+            modelBuilder.Entity<ShopOrder>(entity =>
+            {
+                entity.ToTable("ShopOrder");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Address)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.City)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Cname)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("CName");
+
+                entity.Property(e => e.Cost).HasColumnType("decimal(20, 2)");
+
+                entity.Property(e => e.Payment)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.State)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Line)
+                    .WithMany(p => p.ShopOrders)
+                    .HasForeignKey(d => d.LineId)
+                    .HasConstraintName("FK__ShopOrder__LineI__2645B050");
             });
 
             modelBuilder.Entity<Store>(entity =>
@@ -69,20 +128,15 @@ namespace DL.Entities
 
             modelBuilder.Entity<StoreInv>(entity =>
             {
-                entity.HasKey(e => new { e.Ch, e.Id })
-                    .HasName("PK__StoreInv__5135D4B81F18E93B");
-
                 entity.ToTable("StoreInv");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Ch)
                     .HasMaxLength(3)
                     .IsUnicode(false)
                     .HasColumnName("CH")
                     .IsFixedLength(true);
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("ID");
 
                 entity.Property(e => e.ProdName)
                     .IsRequired()
@@ -94,7 +148,7 @@ namespace DL.Entities
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.StoreInvs)
                     .HasForeignKey(d => d.StoreId)
-                    .HasConstraintName("FK__StoreInv__StoreI__00200768");
+                    .HasConstraintName("FK__StoreInv__StoreI__10566F31");
             });
 
             OnModelCreatingPartial(modelBuilder);

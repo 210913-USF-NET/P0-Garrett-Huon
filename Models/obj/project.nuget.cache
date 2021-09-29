@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "qD4T5haXdf/S0gUskNlXKTLGv6gmVhqpIlGxXYwQkGh1XzcdROklWAGFPvTa2oKzkgU7YknMZEIn4ZedvfCD4Q==",
+  "dgSpecHash": "MuyUTMHhplVDGOUTjdGumTBSwy8ikC6POLNcuB9tpPm+NFd6bOAwXPuNMhvcx5roP+SdBv/Zzhs0g1E9Ni7wRw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Garrett\\Documents\\TrainerCode\\P0-Garrett-Huon\\Models\\Models.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Garrett\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",
+    "C:\\Users\\Garrett\\.nuget\\packages\\serilog.sinks.console\\4.0.0\\serilog.sinks.console.4.0.0.nupkg.sha512",
+    "C:\\Users\\Garrett\\.nuget\\packages\\serilog.sinks.file\\5.0.0\\serilog.sinks.file.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

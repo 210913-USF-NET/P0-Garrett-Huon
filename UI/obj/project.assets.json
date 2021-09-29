@@ -1572,6 +1572,11 @@
       "Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "serilog": "2.10.0",
+          "serilog.sinks.console": "4.0.0",
+          "serilog.sinks.file": "5.0.0"
+        },
         "compile": {
           "bin/placeholder/Models.dll": {}
         },

@@ -7,6 +7,11 @@ namespace DL.Entities
 {
     public partial class StoreInv
     {
+        public StoreInv()
+        {
+            LineItems = new HashSet<LineItem>();
+        }
+
         public int Id { get; set; }
         public string Ch { get; set; }
         public string ProdName { get; set; }
@@ -15,5 +20,6 @@ namespace DL.Entities
         public int StoreId { get; set; }
 
         public virtual Store Store { get; set; }
+        public virtual ICollection<LineItem> LineItems { get; set; }
     }
 }

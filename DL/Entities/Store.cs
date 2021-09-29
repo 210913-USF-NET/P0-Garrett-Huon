@@ -9,6 +9,7 @@ namespace DL.Entities
     {
         public Store()
         {
+            LineItems = new HashSet<LineItem>();
             StoreInvs = new HashSet<StoreInv>();
         }
 
@@ -18,6 +19,7 @@ namespace DL.Entities
         public string City { get; set; }
         public string State { get; set; }
 
+        public virtual ICollection<LineItem> LineItems { get; set; }
         public virtual ICollection<StoreInv> StoreInvs { get; set; }
     }
 }

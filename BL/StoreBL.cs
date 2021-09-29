@@ -15,6 +15,7 @@ namespace StoreBL
             _repo = repo;
         }
 
+        //User/Customer function
         public List<Customers> GetCustomers()
         {
             return _repo.GetCustomers();
@@ -32,11 +33,10 @@ namespace StoreBL
         public Customers GetCustomerById(int id)
         {
             return _repo.GetCustomerById(id);
+
         }
-        public List<Product> GetInventory()
-        {
-            return _repo.GetInventory();
-        }
+
+        //Products and Items
 
         public Product AddProduct(Product prod)
         {
@@ -48,6 +48,51 @@ namespace StoreBL
             return _repo.ViewProducts(queryStr);
         }
 
+        public Product GetProdById(int id)
+        {
+            return _repo.GetProdById(id);
+
+        }
+
+        public Product UpdateItem(Product itemToUpdate)
+        {
+            return _repo.UpdateItem(itemToUpdate);
+        }
+
+        public LineItem AddItemToCart(LineItem cartItem)
+        {
+            return _repo.AddItemToCart(cartItem);
+        }
+
+        public List<LineItem> GetLineItem()
+        {
+            return _repo.GetLineItem();
+        }
+
+        public List<Product> GetInventory()
+        {
+            return _repo.GetInventory();
+        }
+
+        public ShopOrder AddOrder(ShopOrder order)
+        {
+            return _repo.AddOrder(order);
+        }
+
+        public List<ShopOrder> SearchForOrder(string queryStr)
+        {
+            return _repo.SearchForOrder(queryStr);
+        }
+
+        public ShopOrder GetOrderById(int id)
+        {
+            return _repo.GetOrderById(id);
+        }
+
+        public List<ShopOrder> GetAllOrders()
+        {
+            return _repo.GetAllOrders();
+        }
       
     }
 }

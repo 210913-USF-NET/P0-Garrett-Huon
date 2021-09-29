@@ -1,12 +1,20 @@
 using System;
 using StoreBL;
+using System.Collections.Generic;
+using Model = Models;
+using Entity = DL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace UI
 {
     public class Luggage : IMenu
     {
-        public Luggage(BLI bl)
+        private BLI _bl;
+        private ShoppesService _shoppeservice;
+        public Luggage(BLI bl, ShoppesService shoppesservice)
         {
+            _bl = bl;
+            _shoppeservice = shoppesservice;
             
         }
         public void Start()
@@ -87,23 +95,23 @@ namespace UI
 
         private void CreateProduct()
         {
-            Product newProd = new Product();
+            Model.Product newProd = new Model.Product();
 
             Console.WriteLine("Please Enter Item Name");
-            newProd.Name = Console.ReadLine();
+            newProd.ProdName = Console.ReadLine();
 
             Console.WriteLine("Identifying Character");
             newProd.Ch = Console.ReadLine();
 
             Console.WriteLine("Please Enter the Price");
-            newProd.ProdPrice = Console.ReadLine();
+            newProd.ProdPrice = Convert.ToDecimal(Console.ReadLine());
 
             Console.WriteLine("Please Enter Current Stock");
-            newProd.ProdStock = Console.ReadLine();
+            newProd.ProdStock = Int32.Parse(Console.ReadLine());
 
             Console.WriteLine("Store Number");
-            newProd.StoreId = Console.ReadLine();
-            Product addProd = _bl.AddProduct();
+            newProd.StoreId = Int32.Parse(Console.ReadLine());
+            Model.Product addProd = _bl.AddProduct(newProd);
             
         }
     }
